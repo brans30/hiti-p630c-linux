@@ -1,0 +1,6 @@
+# HiTi proprietary tables and driver packages must never be committed
+data/
+*.bin
+*.zip
+gutenprint-*/
+gutenprint-*.tar.*

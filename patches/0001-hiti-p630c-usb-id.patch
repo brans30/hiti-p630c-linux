@@ -1,0 +1,26 @@
+From: HiTi P630C Linux contributor
+Subject: [PATCH] dyesub: Add HiTi P630C (USB 0d16:0513) as P_HITI_630 variant
+
+The HiTi P630C identifies as USB 0d16:0513 ("HiTi:Usb Photo Printer:HiTi P630C").
+It was previously a commented-out placeholder with an unknown PID.
+Tested with firmware 1.02.0.N, 6x8 media: 4x6 (w288h432), 4x6-div2 and
+6x8 print correctly in colour once the P630 heat/correction tables
+(heatqcrp.bin, CCQPrp.bin from HiTi P630 driver v1.0.5.23) are present
+in backend_data.
+---
+--- a/src/cups/backend_hiti.c
++++ b/src/cups/backend_hiti.c
+@@ -3871,6 +3871,6 @@
+ 	{ 0x0d16, 0x0510, P_HITI_826, NULL, "joyspace-u826"}, /* OEM variant of P525 */
+ 	{ 0x0d16, 0x0511, P_HITI_630, NULL, "hiti-p630"},
+ 	{ 0x0d16, 0x0511, P_HITI_630, NULL, "hiti-p630a"}, /* Duplicate */
+-//	{ 0x0d16, XXXXX, P_HITI_630, NULL, "hiti-p630c"}, // placeholder
++	{ 0x0d16, 0x0513, P_HITI_630, NULL, "hiti-p630c"},
+ 	{ 0x0d16, 0x0512, P_SWIFTFOTO_KSF10, NULL, "swiftfoto-ksf10r"}, /* OEM variant of P525 */
+ 	{ 0x0d16, 0xc000, P_HITI_51X, NULL, "yashica-yp120"},
+--- a/src/xml/printers/dyesub.xml
++++ b/src/xml/printers/dyesub.xml
+@@ -135,2 +135,3 @@
+       <printer translate="name" name="HiTi P630" deviceid="MFG:HiTi;MDL:P630;CLS:PRINTER;" driver="hiti-p630" manufacturer="HiTi" model="6504" />
+       <printer translate="name" name="HiTi P630A" deviceid="MFG:HiTi;MDL:P630A;CLS:PRINTER;" driver="hiti-p630a" manufacturer="HiTi" model="6504" />
++      <printer translate="name" name="HiTi P630C" deviceid="MFG:HiTi;MDL:P630C;CLS:PRINTER;" driver="hiti-p630c" manufacturer="HiTi" model="6504" />
